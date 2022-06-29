@@ -4,7 +4,9 @@ const { hideBin } = require('yargs/helpers');
 const argv = yargs(hideBin(process.argv))
     .argv;
 
+const locality = `en-US`;
 
+// The reason we define this option is for toLocaleString will return numeric strings with commas.
 const numericStringOptions = {
     useGrouping: false
 }
@@ -28,14 +30,14 @@ function findNextPalindromeStartingWith(num)
 {
     let nextNum = num;
 
-    let nextNumLength = nextNum.toLocaleString(`en-US`, numericStringOptions)
+    let nextNumLength = nextNum.toLocaleString(locality, numericStringOptions)
         .length;
     console.log(`nextNum = ${nextNum}`);
     console.log(`nextNumLength = ${nextNumLength}`);
 
     while (nextNumLength < 2) {
         nextNum++;
-        nextNumLength = nextNum.toLocaleString(`en-US`, numericStringOptions)
+        nextNumLength = nextNum.toLocaleString(locality, numericStringOptions)
             .length;
     }
 
@@ -54,7 +56,7 @@ function findFirstPalindromeBefore(endNum) {
         .length;
 
     console.log(`nextNum = ${nextNum}`);
-    console.log(`nextNume as string is: '${nextNum.toLocaleString(`en-US`, numericStringOptions) }'`);
+    console.log(`nextNume as string is: '${nextNum.toLocaleString(locality, numericStringOptions) }'`);
     console.log(`nextNumLength = ${nextNumLength}`);
 
 
@@ -73,7 +75,7 @@ function findFirstPalindromeBefore(endNum) {
 
 function reverseNum(num)
 {
-    let numString = num.toLocaleString(`en-US`, numericStringOptions)
+    let numString = num.toLocaleString(locality, numericStringOptions)
         .split("");
 
     return numString.reverse()
