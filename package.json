@@ -1,0 +1,12 @@
+{
+  "name": "find-next-palindrone",
+  "version": "0.0.0",
+  "description": "FindNextPalindrone",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "yargs": "github:yargs/yargs"
+  }
+}
