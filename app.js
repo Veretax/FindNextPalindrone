@@ -5,6 +5,9 @@ const argv = yargs(hideBin(process.argv))
     .argv;
 
 
+const numericStringOptions = {
+    useGrouping: false
+}
 // Find Next Palindrome can be run as follows:
 // * Find the next palindrome starting with (x)
 //      node app.js --start=x
@@ -15,17 +18,24 @@ const argv = yargs(hideBin(process.argv))
 //      node app.js --start=x --end=y
 //
 //      returns: the
+//
+// * Find the last palindrome before ending number with (x){
+//      node app.js --end=x
+//
+//      returns: 
 
 function findNextPalindromeStartingWith(num)
 {
     let nextNum = num;
 
-    let nextNumLength = nextNum.toLocaleString()
+    let nextNumLength = nextNum.toLocaleString(`en-US`, numericStringOptions)
         .length;
+    console.log(`nextNum = ${nextNum}`);
+    console.log(`nextNumLength = ${nextNumLength}`);
 
     while (nextNumLength < 2) {
         nextNum++;
-        nextNumLength = nextNum.toLocaleString()
+        nextNumLength = nextNum.toLocaleString(`en-US`, numericStringOptions)
             .length;
     }
 
@@ -36,10 +46,34 @@ function findNextPalindromeStartingWith(num)
     return nextNum;
 }
 
+function findFirstPalindromeBefore(endNum) {
+
+    let nextNum = --endNum;
+
+    let nextNumLength = nextNum.toLocaleString('en-US', {useGrouping: false})
+        .length;
+
+    console.log(`nextNum = ${nextNum}`);
+    console.log(`nextNume as string is: '${nextNum.toLocaleString(`en-US`, numericStringOptions) }'`);
+    console.log(`nextNumLength = ${nextNumLength}`);
+
+
+    while ( nextNum != reverseNum(nextNum) ) {
+        nextNum--;
+    }
+
+    if ( nextNum < 10 ) {
+        return -1;
+    }
+
+    return nextNum;
+
+}
+
 
 function reverseNum(num)
 {
-    let numString = num.toLocaleString()
+    let numString = num.toLocaleString(`en-US`, numericStringOptions)
         .split("");
 
     return numString.reverse()
@@ -75,4 +109,11 @@ else if ( argv.start > 0 && argv.end != null ) {
 
         console.log(`The last palindrome found between ${argv.start} and ${argv.end} is: ${lastPalindrome}`);
     }
+}
+else if (argv.start == null && argv.end != null) {
+    let end = argv.end;
+
+    let finalPalindrome = findFirstPalindromeBefore(end);
+
+    console.log(`The final palindrome found before ${argv.end} is: ${finalPalindrome }`);
 }
