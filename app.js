@@ -24,7 +24,7 @@ const numericStringOptions = {
 // * Find the last palindrome before ending number with (x){
 //      node app.js --end=x
 //
-//      returns: 
+//      returns: The final palindrome found before 5000 is: 4994
 
 function findNextPalindromeStartingWith(num)
 {
@@ -32,8 +32,6 @@ function findNextPalindromeStartingWith(num)
 
     let nextNumLength = nextNum.toLocaleString(locality, numericStringOptions)
         .length;
-    console.log(`nextNum = ${nextNum}`);
-    console.log(`nextNumLength = ${nextNumLength}`);
 
     while (nextNumLength < 2) {
         nextNum++;
@@ -54,11 +52,6 @@ function findFirstPalindromeBefore(endNum) {
 
     let nextNumLength = nextNum.toLocaleString('en-US', {useGrouping: false})
         .length;
-
-    console.log(`nextNum = ${nextNum}`);
-    console.log(`nextNume as string is: '${nextNum.toLocaleString(locality, numericStringOptions) }'`);
-    console.log(`nextNumLength = ${nextNumLength}`);
-
 
     while ( nextNum != reverseNum(nextNum) ) {
         nextNum--;
